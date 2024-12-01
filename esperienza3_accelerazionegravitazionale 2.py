@@ -854,10 +854,6 @@ ins4.set_ylim(44.2, 44.8)
 ins4.set_title('l={:}cm'.format(l[3]))
 ins4.grid()
 
-plt.savefig('ciao.jpeg', bbox_inches='tight')
-from google.colab import files
-files.download('ciao.jpeg')
-
 plt.show()
 
 #Grafico con distribuzione normale mcf
