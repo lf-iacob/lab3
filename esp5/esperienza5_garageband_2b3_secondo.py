@@ -20,11 +20,12 @@ t2=np.linspace(0 , num2/samplerate2, num2)
 
 #Realizzazione del grafico: waveform
 plt.subplots(figsize=(11,7))
-plt.plot(t2, y2, color='limegreen')
+plt.plot(t2, y2, color='black')
 plt.title('Waveform 9: Secondo', size=30)
 plt.xlabel('Tempo [s]', size=20)
 plt.ylabel('Ampiezza [UA]', size=20)
 plt.show()
+print('Riproduzione della canzone originale')
 default_speaker.play(data2/np.max(data2), samplerate2) #ascolto originale
 
 
@@ -50,17 +51,17 @@ p2_norm=p2/p2_0
 fig, ax=plt.subplots(1, 3, figsize=(15,6))
 fig.suptitle('Fourier Analysis: Secondo', fontsize=35, y=1.05)
 ax[0].set_title('Parte reale', fontsize=25)
-ax[0].plot(freq2[:len(freq2)//2], r2[:len(r2)//2], color='limegreen')
+ax[0].plot(freq2[:len(freq2)//2], r2[:len(r2)//2], color='black')
 ax[0].grid(linestyle=':')
 ax[0].set_xlabel('Frequenza [Hz]', fontsize=20)
 ax[0].set_ylabel('Re(C_k) [UA]', fontsize=20)
 ax[1].set_title('Parte immaginaria', fontsize=25)
-ax[1].plot(freq2[:len(freq2)//2], i2[:len(i2)//2], color='limegreen')
+ax[1].plot(freq2[:len(freq2)//2], i2[:len(i2)//2], color='black')
 ax[1].grid(linestyle=':')
 ax[1].set_xlabel('Frequenza [Hz]', fontsize=20)
 ax[1].set_ylabel('Im(C_k) [UA]', fontsize=20)
 ax[2].set_title('Spettro di potenza', fontsize=25)
-ax[2].plot(freq2[:len(freq2)//2], p2[:len(p2)//2], color='limegreen')
+ax[2].plot(freq2[:len(freq2)//2], p2[:len(p2)//2], color='black')
 ax[2].grid(linestyle=':')
 ax[2].set_xlabel('Frequenza [Hz]', fontsize=20)
 ax[2].set_ylabel('|C_k|^2 [UA]', fontsize=20)
@@ -68,12 +69,40 @@ plt.show()
 
 plt.figure()
 plt.title('Secondo: Spettro di potenza normalizzato', fontsize=25)
-plt.plot(freq2[:len(freq2)//2], p2_norm[:len(p2)//2], color='limegreen', marker='*')
+plt.plot(freq2[:len(freq2)//2], p2_norm[:len(p2)//2], color='black', marker='*')
 plt.grid(linestyle=':')
-#plt.xlim(-50, 2500)
+plt.xlim(-50, 3000)
 plt.xlabel('Frequenza [Hz]', fontsize=20)
 plt.ylabel('|C_k|^2 norm', fontsize=20)
 plt.show()
 
+#ESTRAZIONE DEL BASSO
+mask_xbasso=abs(freq2)>500
+c2_basso=c2.copy()
+c2_basso[mask_xbasso]=0
+antiy2_basso=fft.irfft(c2_basso, n=len(t2)) #antitrasformo filtrato
+sf.write('./secondo_rw_basso.wav', antiy2_basso, samplerate2) #riscrivo file wav filtrato
+print('Riproduzione del segnale prodotto dal basso')
+default_speaker.play(antiy2_basso/np.max(antiy2_basso), samplerate2) #riascolto wav filtrato sul basso
 
-''' PARTE MANCANTE: Consegna :), cioè separare gli strumenti '''
+#ESTRAZIONE DELLA CHITARRA
+mask_xchitarra=abs(freq2)<500
+c2_chitarra=c2.copy()
+c2_chitarra[mask_xchitarra]=0
+antiy2_chitarra=fft.irfft(c2_chitarra, n=len(t2)) #antitrasformo filtrato
+sf.write('./secondo_rw_chitarra.wav', antiy2_chitarra, samplerate2) #riscrivo file wav filtrato
+print('Riproduzione del segnale prodotto dalla chitarra')
+default_speaker.play(antiy2_chitarra/np.max(antiy2_chitarra), samplerate2) #riascolto wav filtrato sulla chitarra
+
+#RAPPRESENTAZIONE WAV FILTRATO
+fig, ax=plt.subplots(figsize=(11,7))
+plt.plot(t2, y2, color='black', label='Original', alpha=0.5)
+plt.plot(t2, antiy2_basso, color='red', label='Filtrato: basso', alpha=0.3)
+plt.plot(t2, antiy2_chitarra, color='gold', label='Filtrato: basso', alpha=0.3)
+plt.title('Waveform 9: Secondo filtered', size=30)
+plt.xlabel('Tempo [s]', size=20)
+plt.ylabel('Ampiezza [UA]', size=20)
+plt.legend(fontsize=18, loc='lower right')
+plt.show()
+
+''' PARTE MANCANTE: decidere con un criterio formale la soglia di separazione tra i due strumenti '''
