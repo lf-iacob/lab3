@@ -98,7 +98,7 @@ default_speaker.play(antiy2_chitarra/np.max(antiy2_chitarra), samplerate2) #rias
 fig, ax=plt.subplots(figsize=(11,7))
 plt.plot(t2, y2, color='black', label='Original', alpha=0.5)
 plt.plot(t2, antiy2_basso, color='red', label='Filtrato: basso', alpha=0.3)
-plt.plot(t2, antiy2_chitarra, color='gold', label='Filtrato: basso', alpha=0.3)
+plt.plot(t2, antiy2_chitarra, color='gold', label='Filtrato: chitarra', alpha=0.3)
 plt.title('Waveform 9: Secondo filtered', size=30)
 plt.xlabel('Tempo [s]', size=20)
 plt.ylabel('Ampiezza [UA]', size=20)
