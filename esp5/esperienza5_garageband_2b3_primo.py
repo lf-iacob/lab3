@@ -25,6 +25,7 @@ plt.title('Waveform 8: Primo', size=30)
 plt.xlabel('Tempo [s]', size=20)
 plt.ylabel('Ampiezza [UA]', size=20)
 plt.show()
+print('Riproduzione della canzone originale')
 default_speaker.play(data2/np.max(data2), samplerate2) #ascolto originale
 
 
@@ -76,7 +77,7 @@ plt.ylabel('|C_k|^2 norm', fontsize=20)
 plt.show()
 
 #ESTRAZIONE DEL BASSO
-mask_xbasso=abs(freq2)>180
+mask_xbasso=abs(freq2)>500
 c2_basso=c2.copy()
 c2_basso[mask_xbasso]=0
 antiy2_basso=fft.irfft(c2_basso, n=len(t2)) #antitrasformo filtrato
@@ -85,7 +86,7 @@ print('Riproduzione del segnale prodotto dal basso')
 default_speaker.play(antiy2_basso/np.max(antiy2_basso), samplerate2) #riascolto wav filtrato sul basso
 
 #ESTRAZIONE DELLA CHITARRA
-mask_xchitarra=abs(freq2)<180
+mask_xchitarra=abs(freq2)<500
 c2_chitarra=c2.copy()
 c2_chitarra[mask_xchitarra]=0
 antiy2_chitarra=fft.irfft(c2_chitarra, n=len(t2)) #antitrasformo filtrato
@@ -104,4 +105,4 @@ plt.ylabel('Ampiezza [UA]', size=20)
 plt.legend(fontsize=18, loc='lower right')
 plt.show()
 
-''' PARTE MANCANTE: decidere con un criterio formale la soglia di separazione tra i due strumenti '''
+''' PARTE MANCANTE: decidere con un criterio formale la soglia di separazione tra i due strumenti (400 o 480 o 500)'''
