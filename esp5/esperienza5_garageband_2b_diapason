@@ -319,3 +319,6 @@ plt.xlabel('Tempo [s]', size=20)
 plt.ylabel('Ampiezza [UA]', size=20)
 plt.legend(fontsize=13, loc='lower right')
 plt.show()
+
+
+''' PARTE MANCANTE: RICOSTRUZIONE DEL SEGNALE A MANO COME SOMMA DI SENI E DI COSENI '''
