@@ -25,6 +25,7 @@ plt.title('Waveform 1: Diapason', size=30)
 plt.xlabel('Tempo [s]', size=20)
 plt.ylabel('Ampiezza [UA]', size=20)
 plt.show()
+default_speaker.play(data1/np.max(data1), samplerate1) #ascolto originale
 
 ''' ANALISI DI FOURIER '''
 
@@ -68,6 +69,7 @@ plt.figure()
 plt.title('Diapason: Spettro di potenza normalizzato', fontsize=25)
 plt.plot(freq1[:len(freq1)//2], p1_norm[:len(p1)//2], color='darkorchid', marker='*')
 plt.grid(linestyle=':')
+plt.xlim(0, 2500)
 plt.xlabel('Frequenza [Hz]', fontsize=20)
 plt.ylabel('|C_k|^2 norm', fontsize=20)
 plt.show()
@@ -96,7 +98,6 @@ ax[2].set_ylabel('|C_k|^2 norm', fontsize=20)
 ax[2].set_xlim(1978, 1985)
 ax[2].set_ylim(0, 0.025)
 plt.show()
-
 
 
 #ESTRAZIONE DEL SOLO PRIMO PICCO AD ARMONICA PRINICIPALE
@@ -272,7 +273,7 @@ plt.ylabel('Ampiezza [UA]', size=20)
 plt.legend(fontsize=13, loc='lower right')
 plt.show()
 
-#ESTRAZIONE DEL  SECONDO PICCO AD ARMONICA PRINICIPALE E INTORNO SECONDARIO
+#ESTRAZIONE DEL SECONDO PICCO AD ARMONICA PRINICIPALE E INTORNO SECONDARIO
 mask_2s=(freq1>882)|(freq1<879)
 c1_2s=c1.copy()
 c1_2s[mask_2s]=0
@@ -304,7 +305,7 @@ for i in range(0, len(c1_2ss)):
     if(abs(c1_2ss[i])!=0):
         print(abs(c1_2ss[i])**2)
 antiy1_2ss=fft.irfft(c1_2ss, n=len(t1)) #antitrasformo filtrato
-sf.write('./diapason_mask_2s.wav', antiy1_2ss, samplerate1) #riscrivo file wav filtrato
+sf.write('./diapason_mask_2ss.wav', antiy1_2ss, samplerate1) #riscrivo file wav filtrato
 default_speaker.play(data1/np.max(data1), samplerate1) #riascolto originale
 default_speaker.play(antiy1_2/np.max(antiy1_2), samplerate1) #riascolto wav filtrato prima al singolo picco principale
 default_speaker.play(antiy1_2s/np.max(antiy1_2s), samplerate1) #riascolto wav filtrato
