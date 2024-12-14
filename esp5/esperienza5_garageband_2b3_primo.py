@@ -70,10 +70,38 @@ plt.figure()
 plt.title('Primo: Spettro di potenza normalizzato', fontsize=25)
 plt.plot(freq2[:len(freq2)//2], p2_norm[:len(p2)//2], color='hotpink', marker='*')
 plt.grid(linestyle=':')
-#plt.xlim(-50, 2500)
+plt.xlim(-50, 1500)
 plt.xlabel('Frequenza [Hz]', fontsize=20)
 plt.ylabel('|C_k|^2 norm', fontsize=20)
 plt.show()
 
+#ESTRAZIONE DEL BASSO
+mask_xbasso=abs(freq2)>180
+c2_basso=c2.copy()
+c2_basso[mask_xbasso]=0
+antiy2_basso=fft.irfft(c2_basso, n=len(t2)) #antitrasformo filtrato
+sf.write('./primo_rw_basso.wav', antiy2_basso, samplerate2) #riscrivo file wav filtrato
+print('Riproduzione del segnale prodotto dal basso')
+default_speaker.play(antiy2_basso/np.max(antiy2_basso), samplerate2) #riascolto wav filtrato sul basso
 
-''' PARTE MANCANTE: Consegna :), cioè separare gli strumenti '''
+#ESTRAZIONE DELLA CHITARRA
+mask_xchitarra=abs(freq2)<180
+c2_chitarra=c2.copy()
+c2_chitarra[mask_xchitarra]=0
+antiy2_chitarra=fft.irfft(c2_chitarra, n=len(t2)) #antitrasformo filtrato
+sf.write('./primo_rw_chitarra.wav', antiy2_chitarra, samplerate2) #riscrivo file wav filtrato
+print('Riproduzione del segnale prodotto dalla chitarra')
+default_speaker.play(antiy2_chitarra/np.max(antiy2_chitarra), samplerate2) #riascolto wav filtrato sulla chitarra
+
+#RAPPRESENTAZIONE WAV FILTRATO
+fig, ax=plt.subplots(figsize=(11,7))
+plt.plot(t2, y2, color='hotpink', label='Original', alpha=0.5)
+plt.plot(t2, antiy2_basso, color='teal', label='Filtrato: basso', alpha=0.3)
+plt.plot(t2, antiy2_chitarra, color='gold', label='Filtrato: chitarra', alpha=0.3)
+plt.title('Waveform 8: Primo filtered', size=30)
+plt.xlabel('Tempo [s]', size=20)
+plt.ylabel('Ampiezza [UA]', size=20)
+plt.legend(fontsize=18, loc='lower right')
+plt.show()
+
+''' PARTE MANCANTE: decidere con un criterio formale la soglia di separazione tra i due strumenti '''
