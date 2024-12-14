@@ -20,7 +20,7 @@ t2=np.linspace(0 , num2/samplerate2, num2)
 
 #Realizzazione del grafico: waveform
 plt.subplots(figsize=(11,7))
-plt.plot(t2, y2, color='orangered')
+plt.plot(t2, y2, color='mediumaquamarine')
 plt.title('Waveform 5: Distorta Pezzo', size=30)
 plt.xlabel('Tempo [s]', size=20)
 plt.ylabel('Ampiezza [UA]', size=20)
