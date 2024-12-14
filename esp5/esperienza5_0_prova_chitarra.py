@@ -16,8 +16,7 @@ default_mic=sc.default_microphone()
 samplerate2=44100
 n=int(input('Digitare la durata della registrazione in secondi: '))
 print('Inizio regitrazione')
-print('G  Em  Am  D')
-print('d d up d up')
+print('...')
 data2=default_mic.record(samplerate=44100, numframes=samplerate2*n)
 print('Fine registrazione')
 #Estrazione dei dati del wav
