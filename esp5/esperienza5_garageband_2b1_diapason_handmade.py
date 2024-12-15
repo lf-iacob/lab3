@@ -52,14 +52,21 @@ plt.show()
 
 #ANTITRAFORMATA DEL SEGNALE PER INTERO MEDIANTE FFT E FUNZIONE FATTA A MANO
 antiy1_fft=fft.irfft(c1, n=len(t1)) #antitrasformo con fft
-antiy1_handmade=fft_handmade(c1) #antitrasformo con la funzione a mano
+n_ragionevole=len(c1)
+antiy1_handmade=fft_handmade(c1[:n_ragionevole]) #antitrasformo con la funzione a mano
+print(antiy1_handmade)
 plt.figure()
 plt.title('Diapason: Ricostruzione del segnale originario', fontsize=20)
-plt.plot(t1, y1, color='darkorchid', alpha=0.3, label='Originale')
-plt.plot(t1, antiy1_fft, color='gold', alpha=0.3, label='FFT python')
-plt.plot(t1, antiy1_handmade, color='crimson', alpha=0.3, label='Hand made')
+plt.plot(t1[:n_ragionevole], y1[:n_ragionevole], color='royalblue', alpha=0.4, label='Originale')
+plt.plot(t1[:n_ragionevole], antiy1_fft[:n_ragionevole], color='gold', alpha=0.4, label='FFT python')
+plt.plot(t1[:n_ragionevole], antiy1_handmade.real, color='crimson', alpha=0.4, label='Hand made')
 plt.grid(linestyle=':')
 plt.xlabel('Tempo [s]', size=20)
 plt.ylabel('Ampiezza [UA]', size=20)
 plt.legend(fontsize=15)
 plt.show()
+
+'''
+DOMANDE: LA FUNZIONE SCRITTA È CORRETTA?
+PERCHÈ ANTITRASFORMANDO TROVO UN SEGNALE CON SIA PARTE REALE CHE IMMAGINARIA?????
+'''
