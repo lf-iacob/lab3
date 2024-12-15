@@ -28,7 +28,6 @@ plt.show()
 print('Riproduzione della canzone originale')
 default_speaker.play(data2/np.max(data2), samplerate2) #ascolto originale
 
-
 ''' ANALISI DI FOURIER '''
 
 #Trasformata e normalizzazione
@@ -77,7 +76,7 @@ plt.ylabel('|C_k|^2 norm', fontsize=20)
 plt.show()
 
 #ESTRAZIONE DEL BASSO
-mask_xbasso=abs(freq2)>500
+mask_xbasso=abs(freq2)>480
 c2_basso=c2.copy()
 c2_basso[mask_xbasso]=0
 antiy2_basso=fft.irfft(c2_basso, n=len(t2)) #antitrasformo filtrato
@@ -86,7 +85,7 @@ print('Riproduzione del segnale prodotto dal basso')
 default_speaker.play(antiy2_basso/np.max(antiy2_basso), samplerate2) #riascolto wav filtrato sul basso
 
 #ESTRAZIONE DELLA CHITARRA
-mask_xchitarra=abs(freq2)<500
+mask_xchitarra=abs(freq2)<920
 c2_chitarra=c2.copy()
 c2_chitarra[mask_xchitarra]=0
 antiy2_chitarra=fft.irfft(c2_chitarra, n=len(t2)) #antitrasformo filtrato
@@ -105,4 +104,35 @@ plt.ylabel('Ampiezza [UA]', size=20)
 plt.legend(fontsize=18, loc='lower right')
 plt.show()
 
+
 ''' PARTE MANCANTE: decidere con un criterio formale la soglia di separazione tra i due strumenti (400 o 480 o 500)'''
+
+'''
+ANALISI SUCCESSIVA DI PICCHETTI NELLA MASK SU FREQUENZE:(abs(freq2)<a)|(abs(freq2)>b)
+480: limite inferiore, sul basso non c'è la chitarra, ma la chitarra percepisce il basso
+480-510: picco della chitarra (basso quasi impercettibile)
+------- DA TOGLIERE PER INTERO PERCHÈ STRUMENTI SOVRAPPOSTI A 585-605:misto
+585-589: basso prevalente ma poi svalvola al momento della chitarra
+589-590.1: basso ma poi svalvola al momento della chitarra un po' più del precedente (foto)
+590.1-590.8: basso ma poi svalvola al momento della chitarra (foto)
+590.8-592.2: basso ma poi svalvola al momento della chitarra (foto)
+592.2-593.8: basso ma poi svalvola al momento della chitarra (foto)
+593.8-595.1: basso ma poi svalvola al momento della chitarra (foto); anyways la chitarra adesso sembra essere prevalente rispetto allo sfondo del basso che ha ampiezza piccola e molto più vicina allo zero rispetto ai precedenti. Ho una ipotesi: non è che suonando il basso, in qualche modo viene messa in risonanza qualche corda della chitarra per cui si genera un piccolo rumore su questo strumento (anche quando non suona) dovuto all'altro (che invece suona)? Oppure quello sfondo potrebbe essere dovuto al modo in cui viene suonata la corda del basso che vibra ad una frequenza più alta che il basso normalmente non dovrebbe produrre (banalmente, il dito che non pigia in modo abbastanza forte la corda).
+595.1-596.9: basso quasi impercettibile e poi svalvola al momento della chitarra in modo prevalente ormai (foto)
+596.9-598: basso quasi impercettibile e poi svalvola al momento della chitarra in modo prevalente (foto)
+598-600: basso quasi impercettibile e poi svalvola al momento della chitarra in modo prevalente (foto)
+600-601.2: basso quasi impercettibile e poi svalvola al momento della chitarra in modo prevalente (foto)
+601.2-602.6: basso praticamente impercettibile e poi svalvola al momento della chitarra in modo prevalente (foto)
+602.6-604.5: entrambi quasi impercettibili (foto)
+-------
+700-750: si sente un po' il basso, poi svalvola parecchio al momento della chitarra (foto)
+850-910: quasi che il basso non c'è, ma un po' si sente, mentre la chitarra risuona tanto (foto)
+920-1010
+1010-1070
+1100-1150
+1150-1185
+1185-1205
+1205-1250
+1300-1350
+1450-1500
+'''
