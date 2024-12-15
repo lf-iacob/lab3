@@ -13,6 +13,7 @@ def fft_handmade(X):
     for n in range(0, N):
         sum=0
         for k in range(0, N):
-            sum=sum+(X[k]*(np.cos((2*np.pi*n*k)/N)+1j*np.sin((2*np.pi*n*k)/N)))
+            if (X[k]!=0):
+                sum=sum+(X[k]*(np.cos((2*np.pi*n*k)/N)+1j*np.sin((2*np.pi*n*k)/N)))
         signal=np.append(signal, sum)
     return signal
