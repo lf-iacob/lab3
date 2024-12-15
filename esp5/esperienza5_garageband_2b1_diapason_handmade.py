@@ -69,7 +69,7 @@ plt.figure()
 plt.title('Diapason: Ricostruzione del segnale originario', fontsize=20)
 plt.plot(t1[:n_ragionevole], y1[:n_ragionevole], color='royalblue', alpha=0.5, label='Originale')
 plt.plot(t1[:n_ragionevole], antiy1_fft[:n_ragionevole], color='red', alpha=0.5, label='FFT python')
-plt.plot(t1[:n_ragionevole], antiy1_handmade/max(antiy1_handmade) '''ho normalizzato, ma non so quanto senso abbia''', color='black', alpha=0.5, label='Hand made')
+plt.plot(t1[:n_ragionevole], antiy1_handmade/max(antiy1_handmade), color='black', alpha=0.5, label='Hand made') #NB: HO NORMALIZZATO MA TEORICAMENTE NON DOVREI AVERNE BISOGNO
 plt.grid(linestyle=':')
 plt.xlabel('Tempo [s]', size=20)
 plt.ylabel('Ampiezza [UA]', size=20)
