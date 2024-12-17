@@ -144,7 +144,7 @@ plt.show()
 
 fig, ax=plt.subplots(figsize=(11,7))
 plt.plot(t2, antiy2_basso, color='red', label='Basso', alpha=0.3)
-plt.plot(t2, antiy2_chitarra, color='gold', label='Chitarra', alpha=0.3)
+plt.plot(t2, antiy2_chitarra, color='black', label='Chitarra', alpha=0.3)
 plt.plot(t2, antiy2_basso_volume, color='green', label='Basso modificato', alpha=0.3)
 plt.plot(t2, antiy2_chitarra_volume, color='blue', label='Chitarra modficato', alpha=0.3)
 plt.title('Waveform 9: Secondo modified', size=30)
