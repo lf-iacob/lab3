@@ -76,6 +76,7 @@ plt.xlabel('Frequenza [Hz]', fontsize=20)
 plt.ylabel('|C_k|^2 norm', fontsize=20)
 plt.show()
 
+
 #ESTRAZIONE DEL BASSO
 mask_xbasso=abs(freq2)>500
 c2_basso=c2.copy()
@@ -105,4 +106,49 @@ plt.ylabel('Ampiezza [UA]', size=20)
 plt.legend(fontsize=18, loc='lower right')
 plt.show()
 
-''' PARTE MANCANTE: decidere con un criterio formale la soglia di separazione tra i due strumenti '''
+
+''' GIOCO: ALZO IL VOLUME DEL BASSO E DIMINUISCO LA CHITARRA '''
+print('Scegliere il volume degli strumenti')
+b=float(input('Volume basso: '))
+c=float(input('Volume chitarra: '))
+c2_volume=c2.copy()
+for i in range (0, len(c2_volume)):
+    if (abs(freq2[i])<500):
+        c2_volume[i]=c2_volume[i]*b
+    else:
+        c2_volume[i]=c2_volume[i]*c
+        
+mask_xbasso_volume=abs(freq2)>500
+c2_basso_volume=c2_volume.copy()
+c2_basso_volume[mask_xbasso_volume]=0
+mask_xchitarra_volume=abs(freq2)<500
+c2_chitarra_volume=c2_volume.copy()
+c2_chitarra_volume[mask_xchitarra_volume]=0
+
+antiy2_basso_volume=fft.irfft(c2_basso_volume, n=len(t2))
+antiy2_chitarra_volume=fft.irfft(c2_chitarra_volume, n=len(t2))
+antiy2_volume=fft.irfft(c2_volume, n=len(t2))
+sf.write('./secondo_rw_volume.wav', antiy2_volume, samplerate2)
+default_speaker.play(data2/np.max(data2), samplerate2) #ascolto originale
+print('Riproduzione del segnale a volume modificato')
+default_speaker.play(antiy2_volume/np.max(antiy2_volume), samplerate2)
+
+fig, ax=plt.subplots(figsize=(11,7))
+plt.plot(t2, y2, color='black', label='Original', alpha=0.5)
+plt.plot(t2, antiy2_volume, color='mediumseagreen', label='Manipolato', alpha=0.3)
+plt.title('Waveform 9: Secondo modified', size=30)
+plt.xlabel('Tempo [s]', size=20)
+plt.ylabel('Ampiezza [UA]', size=20)
+plt.legend(fontsize=18, loc='lower right')
+plt.show()
+
+fig, ax=plt.subplots(figsize=(11,7))
+plt.plot(t2, antiy2_basso, color='red', label='Basso', alpha=0.3)
+plt.plot(t2, antiy2_chitarra, color='gold', label='Chitarra', alpha=0.3)
+plt.plot(t2, antiy2_basso_volume, color='green', label='Basso modificato', alpha=0.3)
+plt.plot(t2, antiy2_chitarra_volume, color='blue', label='Chitarra modficato', alpha=0.3)
+plt.title('Waveform 9: Secondo modified', size=30)
+plt.xlabel('Tempo [s]', size=20)
+plt.ylabel('Ampiezza [UA]', size=20)
+plt.legend(fontsize=18, loc='lower right')
+plt.show()
