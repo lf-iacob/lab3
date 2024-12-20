@@ -115,7 +115,6 @@ import soundcard as sc
 #Accesso ai dispositivi del computer
 speakers = sc.all_speakers()
 default_speaker = sc.default_speaker()
-srate=44100
 #Lettura dei file .wav
 data1, samplerate1=sf.read('./pulita_pezzo.wav')
 data2, samplerate2=sf.read('./distorta_pezzo.wav')
@@ -127,11 +126,11 @@ default_speaker.play(data2/np.max(data2), samplerate2)
 #Estrazione dei dati dei 5 file .wav
 y1=data1[:,0]
 num1=len(y1)
-x1=np.linspace(0 , num1/srate, num1)
+x1=np.linspace(0 , num1/samplerate1, num1)
 
 y2=data2[:,0]
 num2=len(y2)
-x2=np.linspace(0 , num2/srate, num2)
+x2=np.linspace(0 , num2/samplerate2, num2)
 
 #Realizzazione dei grafici: waveform
 plt.subplots(figsize=(11,7))
