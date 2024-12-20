@@ -1,0 +1,29 @@
+''' SET 2: FILE pulita_pezzo, distorta_pezzo '''
+import soundfile as sf
+import numpy as np
+import matplotlib.pyplot as plt
+
+#Accesso ai dispositivi del computer
+speakers = sc.all_speakers()
+default_speaker = sc.default_speaker()
+#Lettura dei file .wav
+data1, samplerate1=sf.read('./pulita_pezzo.wav')
+data2, samplerate2=sf.read('./distorta_pezzo.wav')
+#Riproduzione file .wav
+default_speaker.play(data1/np.max(data1), samplerate1)
+default_speaker.play(data2/np.max(data2), samplerate2)
+
+#Estrazione dei dati dei 5 file .wav
+y1=data1[:,0]
+num1=len(y1)
+x1=np.linspace(0 , num1/samplerate1, num1)
+
+y2=data2[:,0]
+num2=len(y2)
+x2=np.linspace(0 , num2/samplerate2, num2)
+
+#Riscrittura in file .wav
+sf.write('./pulita_pezzo_rw.wav', y1, samplerate1)
+print('Pulita pezzo riscritto con successo')
+sf.write('./distorta_pezzo_rw.wav', y2, samplerate2)
+print('Distorto pezzo riscritto con successo')
