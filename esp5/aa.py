@@ -10,8 +10,8 @@ default_speaker.play(data1/np.max(data1), samplerate1)     #Riproduzione del fil
 
 #Estrazione dei dati dei file .wav
 y1=data1[:,0]
-num1=len(y1)
-t1=np.linspace(0 , num1/samplerate1, num1)
+numframes1=len(y1)
+t1=np.linspace(0 , numframes1/samplerate1, numframes1)
 
 #Riscrittura in file .wav
 sf.write('./pulita_pezzo_rw.wav', y1, samplerate1)
