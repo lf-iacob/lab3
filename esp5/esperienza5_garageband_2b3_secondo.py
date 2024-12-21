@@ -1,5 +1,4 @@
 ''' SECONDO '''
-
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -22,8 +21,8 @@ t2=np.linspace(0 , num2/samplerate2, num2)
 plt.subplots(figsize=(11,7))
 plt.plot(t2, y2, color='black')
 plt.title('Waveform 9: Secondo', size=30)
-plt.xlabel('Tempo [s]', size=20)
-plt.ylabel('Ampiezza [UA]', size=20)
+plt.xlabel('Tempo (s)', size=20)
+plt.ylabel('Ampiezza (UA)', size=20)
 plt.show()
 print('Riproduzione della canzone originale')
 default_speaker.play(data2/np.max(data2), samplerate2) #ascolto originale
@@ -37,11 +36,7 @@ freq2=fft.fftfreq(len(y2), d=(t2[1]-t2[0]))
 r2=c2.real #parte reale
 i2=c2.imag #parte immaginaria
 p2=abs(c2)**2 #potenza
-'''
-df=pd.DataFrame(columns=['p2']) #dataframe per vedere come sono fatte le potenze
-df['p2']=p2
-df.to_csv('why.csv')
-'''
+
 mask_norm=p2>=max(p2) #maschera di normalizzazione al picco più alto
 c2_0=c2.copy()
 c2_0=c2_0[mask_norm]
@@ -53,18 +48,18 @@ fig.suptitle('Fourier Analysis: Secondo', fontsize=35, y=1.05)
 ax[0].set_title('Parte reale', fontsize=25)
 ax[0].plot(freq2[:len(freq2)//2], r2[:len(r2)//2], color='black')
 ax[0].grid(linestyle=':')
-ax[0].set_xlabel('Frequenza [Hz]', fontsize=20)
-ax[0].set_ylabel('Re(C_k) [UA]', fontsize=20)
+ax[0].set_xlabel('Frequenza (Hz)', fontsize=20)
+ax[0].set_ylabel('Re(C_k) (UA)', fontsize=20)
 ax[1].set_title('Parte immaginaria', fontsize=25)
 ax[1].plot(freq2[:len(freq2)//2], i2[:len(i2)//2], color='black')
 ax[1].grid(linestyle=':')
-ax[1].set_xlabel('Frequenza [Hz]', fontsize=20)
-ax[1].set_ylabel('Im(C_k) [UA]', fontsize=20)
+ax[1].set_xlabel('Frequenza (Hz)', fontsize=20)
+ax[1].set_ylabel('Im(C_k) (UA)', fontsize=20)
 ax[2].set_title('Spettro di potenza', fontsize=25)
 ax[2].plot(freq2[:len(freq2)//2], p2[:len(p2)//2], color='black')
 ax[2].grid(linestyle=':')
-ax[2].set_xlabel('Frequenza [Hz]', fontsize=20)
-ax[2].set_ylabel('|C_k|^2 [UA]', fontsize=20)
+ax[2].set_xlabel('Frequenza (Hz)', fontsize=20)
+ax[2].set_ylabel('|C_k|^2 (UA)', fontsize=20)
 plt.show()
 
 plt.figure()
@@ -72,7 +67,7 @@ plt.title('Secondo: Spettro di potenza normalizzato', fontsize=25)
 plt.plot(freq2[:len(freq2)//2], p2_norm[:len(p2)//2], color='black', marker='*')
 plt.grid(linestyle=':')
 plt.xlim(-50, 3000)
-plt.xlabel('Frequenza [Hz]', fontsize=20)
+plt.xlabel('Frequenza (Hz)', fontsize=20)
 plt.ylabel('|C_k|^2 norm', fontsize=20)
 plt.show()
 
@@ -101,8 +96,8 @@ plt.plot(t2, y2, color='black', label='Original', alpha=0.5)
 plt.plot(t2, antiy2_basso, color='red', label='Filtrato: basso', alpha=0.3)
 plt.plot(t2, antiy2_chitarra, color='gold', label='Filtrato: chitarra', alpha=0.3)
 plt.title('Waveform 9: Secondo filtered', size=30)
-plt.xlabel('Tempo [s]', size=20)
-plt.ylabel('Ampiezza [UA]', size=20)
+plt.xlabel('Tempo (s)', size=20)
+plt.ylabel('Ampiezza (UA)', size=20)
 plt.legend(fontsize=18, loc='lower right')
 plt.show()
 
@@ -137,8 +132,8 @@ fig, ax=plt.subplots(figsize=(11,7))
 plt.plot(t2, y2, color='black', label='Original', alpha=0.5)
 plt.plot(t2, antiy2_volume, color='mediumseagreen', label='Manipolato', alpha=0.3)
 plt.title('Waveform 9: Secondo modified', size=30)
-plt.xlabel('Tempo [s]', size=20)
-plt.ylabel('Ampiezza [UA]', size=20)
+plt.xlabel('Tempo (s)', size=20)
+plt.ylabel('Ampiezza (UA)', size=20)
 plt.legend(fontsize=18, loc='lower right')
 plt.show()
 
@@ -148,7 +143,7 @@ plt.plot(t2, antiy2_chitarra, color='black', label='Chitarra', alpha=0.3)
 plt.plot(t2, antiy2_basso_volume, color='green', label='Basso modificato', alpha=0.3)
 plt.plot(t2, antiy2_chitarra_volume, color='blue', label='Chitarra modficato', alpha=0.3)
 plt.title('Waveform 9: Secondo modified', size=30)
-plt.xlabel('Tempo [s]', size=20)
-plt.ylabel('Ampiezza [UA]', size=20)
+plt.xlabel('Tempo (s)', size=20)
+plt.ylabel('Ampiezza (UA)', size=20)
 plt.legend(fontsize=18, loc='lower right')
 plt.show()
