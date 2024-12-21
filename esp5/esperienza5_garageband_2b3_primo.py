@@ -22,8 +22,8 @@ t2=np.linspace(0 , num2/samplerate2, num2)
 plt.subplots(figsize=(11,7))
 plt.plot(t2, y2, color='hotpink')
 plt.title('Waveform 8: Primo', size=30)
-plt.xlabel('Tempo [s]', size=20)
-plt.ylabel('Ampiezza [UA]', size=20)
+plt.xlabel('Tempo (s)', size=20)
+plt.ylabel('Ampiezza (UA)', size=20)
 plt.show()
 print('Riproduzione della canzone originale')
 default_speaker.play(data2/np.max(data2), samplerate2) #ascolto originale
@@ -36,11 +36,7 @@ freq2=fft.fftfreq(len(y2), d=(t2[1]-t2[0]))
 r2=c2.real #parte reale
 i2=c2.imag #parte immaginaria
 p2=abs(c2)**2 #potenza
-'''
-df=pd.DataFrame(columns=['p2']) #dataframe per vedere come sono fatte le potenze
-df['p2']=p2
-df.to_csv('why.csv')
-'''
+
 mask_norm=p2>=max(p2) #maschera di normalizzazione al picco più alto
 c2_0=c2.copy()
 c2_0=c2_0[mask_norm]
@@ -52,18 +48,18 @@ fig.suptitle('Fourier Analysis: Primo', fontsize=35, y=1.05)
 ax[0].set_title('Parte reale', fontsize=25)
 ax[0].plot(freq2[:len(freq2)//2], r2[:len(r2)//2], color='hotpink')
 ax[0].grid(linestyle=':')
-ax[0].set_xlabel('Frequenza [Hz]', fontsize=20)
-ax[0].set_ylabel('Re(C_k) [UA]', fontsize=20)
+ax[0].set_xlabel('Frequenza (Hz)', fontsize=20)
+ax[0].set_ylabel('Re(C_k) (UA)', fontsize=20)
 ax[1].set_title('Parte immaginaria', fontsize=25)
 ax[1].plot(freq2[:len(freq2)//2], i2[:len(i2)//2], color='hotpink')
 ax[1].grid(linestyle=':')
-ax[1].set_xlabel('Frequenza [Hz]', fontsize=20)
-ax[1].set_ylabel('Im(C_k) [UA]', fontsize=20)
+ax[1].set_xlabel('Frequenza (Hz)', fontsize=20)
+ax[1].set_ylabel('Im(C_k) (UA)', fontsize=20)
 ax[2].set_title('Spettro di potenza', fontsize=25)
 ax[2].plot(freq2[:len(freq2)//2], p2[:len(p2)//2], color='hotpink')
 ax[2].grid(linestyle=':')
-ax[2].set_xlabel('Frequenza [Hz]', fontsize=20)
-ax[2].set_ylabel('|C_k|^2 [UA]', fontsize=20)
+ax[2].set_xlabel('Frequenza (Hz)', fontsize=20)
+ax[2].set_ylabel('|C_k|^2 (UA)', fontsize=20)
 plt.show()
 
 plt.figure()
@@ -71,7 +67,7 @@ plt.title('Primo: Spettro di potenza normalizzato', fontsize=25)
 plt.plot(freq2[:len(freq2)//2], p2_norm[:len(p2)//2], color='hotpink', marker='*')
 plt.grid(linestyle=':')
 plt.xlim(-50, 1500)
-plt.xlabel('Frequenza [Hz]', fontsize=20)
+plt.xlabel('Frequenza (Hz)', fontsize=20)
 plt.ylabel('|C_k|^2 norm', fontsize=20)
 plt.show()
 
@@ -99,16 +95,13 @@ plt.plot(t2, y2, color='hotpink', label='Original', alpha=0.5)
 plt.plot(t2, antiy2_basso, color='teal', label='Filtrato: basso', alpha=0.3)
 plt.plot(t2, antiy2_chitarra, color='gold', label='Filtrato: chitarra', alpha=0.3)
 plt.title('Waveform 8: Primo filtered', size=30)
-plt.xlabel('Tempo [s]', size=20)
-plt.ylabel('Ampiezza [UA]', size=20)
+plt.xlabel('Tempo (s)', size=20)
+plt.ylabel('Ampiezza (UA)', size=20)
 plt.legend(fontsize=18, loc='lower right')
 plt.show()
 
 
-''' PARTE MANCANTE: decidere con un criterio formale la soglia di separazione tra i due strumenti (400 o 480 o 500)'''
-
-'''
-ANALISI SUCCESSIVA DI PICCHETTI NELLA MASK SU FREQUENZE:(abs(freq2)<a)|(abs(freq2)>b)
+''' ANALISI SUCCESSIVA DI PICCHETTI NELLA MASK SU FREQUENZE:(abs(freq2)<a)|(abs(freq2)>b)
 480: limite inferiore, sul basso non c'è la chitarra, ma la chitarra percepisce il basso
 480-510: picco della chitarra (basso quasi impercettibile)
 ------- DA TOGLIERE PER INTERO PERCHÈ STRUMENTI SOVRAPPOSTI A 585-605:misto
@@ -127,12 +120,5 @@ ANALISI SUCCESSIVA DI PICCHETTI NELLA MASK SU FREQUENZE:(abs(freq2)<a)|(abs(freq
 -------
 700-750: si sente un po' il basso, poi svalvola parecchio al momento della chitarra (foto)
 850-910: quasi che il basso non c'è, ma un po' si sente, mentre la chitarra risuona tanto (foto)
-920-1010
-1010-1070
-1100-1150
-1150-1185
-1185-1205
-1205-1250
-1300-1350
-1450-1500
-'''
+920-1010:
+... '''
