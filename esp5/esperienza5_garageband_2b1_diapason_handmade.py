@@ -1,4 +1,4 @@
-''' DIAPASON '''
+''' DIAPASON HANDMADE '''
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -23,8 +23,8 @@ t1=np.linspace(0 , num1/samplerate1, num1)
 plt.subplots(figsize=(11,7))
 plt.plot(t1, y1, color='darkorchid')
 plt.title('Waveform 1: Diapason', size=30)
-plt.xlabel('Tempo [s]', size=20)
-plt.ylabel('Ampiezza [UA]', size=20)
+plt.xlabel('Tempo (s)', size=20)
+plt.ylabel('Ampiezza (UA)', size=20)
 plt.show()
 print('Ascolto segnale audio originale')
 default_speaker.play(data1/np.max(data1), samplerate1) #ascolto originale
@@ -48,7 +48,7 @@ plt.title('Diapason: Spettro di potenza normalizzato', fontsize=25)
 plt.plot(freq1[:len(freq1)//2], p1_norm[:len(p1)//2], color='darkorchid', marker='*')
 plt.grid(linestyle=':')
 plt.xlim(0, 2500)
-plt.xlabel('Frequenza [Hz]', fontsize=20)
+plt.xlabel('Frequenza (Hz)', fontsize=20)
 plt.ylabel('|C_k|^2 norm', fontsize=20)
 plt.show()
 
@@ -83,15 +83,9 @@ plt.figure(figsize=(7,6))
 plt.title('Diapason: Ricostruzione del segnale originario', fontsize=20)
 plt.plot(t1, antiy1_fft, color='blue', alpha=0.5, label='FFT python')
 plt.plot(t1, antiy1_handmade.real, color='red', alpha=0.3, label='Hand made')
-plt.plot(t1, y1, color='gold', alpha=0.3, label='Originale')
+plt.plot(t1, y1, color='green', alpha=0.3, label='Originale')
 plt.grid(linestyle=':')
 plt.xlabel('Tempo [s]', size=20)
 plt.ylabel('Ampiezza [UA]', size=20)
 plt.legend(fontsize=15)
 plt.show()
-
-'''
-DOMANDE: LA FUNZIONE SCRITTA È CORRETTA?
-CON IL CICLO FOR GIÀ A 3000 ELEMENTI CI METTE TROPPO (E COMUNQUE LE AMPIEZZE SONO UN PO' TOO MUCH) PERÒ IL SUONO SEMBRA TORNARE CORRETTAMENTE
-PERCHÈ ANTITRASFORMANDO TROVO UN SEGNALE CON SIA PARTE REALE CHE IMMAGINARIA?????
-'''
