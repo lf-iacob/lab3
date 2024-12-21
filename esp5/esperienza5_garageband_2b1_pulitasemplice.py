@@ -39,7 +39,7 @@ p2=abs(c2)**2 #potenza
 
 p2_0=max(p2[2:]) #tolto il picco di offset
 p2_norm=p2/p2_0
-p22_0=max(p2) #tolto il picco di offset
+p22_0=max(p2)    #compreso il picco di offset
 p22_norm=p2/p22_0
 
 fig, ax=plt.subplots(1, 3, figsize=(15,6))
