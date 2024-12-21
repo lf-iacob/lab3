@@ -3,8 +3,6 @@ FASE A DELLA PARTE 2 (per ogni set di file wav):
 lettura del file wav, estrazione dei dati, ascolto dell'audio, riscrittura in nuovo wav (re-written: rw)
 '''
 
-
-
 ''' SET 1: FILE diapason, pulita_semplice, pulita_media, pulita_difficile, distorta '''
 import soundfile as sf
 import numpy as np
@@ -57,36 +55,36 @@ x5=np.linspace(0 , num5/srate, num5)
 plt.subplots(figsize=(11,7))
 plt.plot(x1, y1, color='darkorchid')
 plt.title('Waveform 1: Diapason', size=20)
-plt.xlabel('Tempo [s]', size=13)
-plt.ylabel('Ampiezza [UA]', size=13)
+plt.xlabel('Tempo (s)', size=13)
+plt.ylabel('Ampiezza (UA)', size=13)
 plt.show()
 
 plt.subplots(figsize=(11,7))
 plt.plot(x2, y2, color='darkorchid')
 plt.title('Waveform 2: Pulita semplice', size=20)
-plt.xlabel('Tempo [s]', size=13)
-plt.ylabel('Ampiezza [UA]', size=13)
+plt.xlabel('Tempo (s)', size=13)
+plt.ylabel('Ampiezza (UA)', size=13)
 plt.show()
 
 plt.subplots(figsize=(11,7))
 plt.plot(x3, y3, color='darkorchid')
 plt.title('Waveform 3: Pulita media', size=20)
-plt.xlabel('Tempo [s]', size=13)
-plt.ylabel('Ampiezza [UA]', size=13)
+plt.xlabel('Tempo (s)', size=13)
+plt.ylabel('Ampiezza (UA)', size=13)
 plt.show()
 
 plt.subplots(figsize=(11,7))
 plt.plot(x4, y4, color='darkorchid')
 plt.title('Waveform 4: Pulita difficile', size=20)
-plt.xlabel('Tempo [s]', size=13)
-plt.ylabel('Ampiezza [UA]', size=13)
+plt.xlabel('Tempo (s)', size=13)
+plt.ylabel('Ampiezza (UA)', size=13)
 plt.show()
 
 plt.subplots(figsize=(11,7))
 plt.plot(x5, y5, color='darkorchid')
 plt.title('Waveform 4: Pulita difficile', size=20)
-plt.xlabel('Tempo [s]', size=13)
-plt.ylabel('Ampiezza [UA]', size=13)
+plt.xlabel('Tempo (s)', size=13)
+plt.ylabel('Ampiezza (UA)', size=13)
 plt.show()
 
 #Riscrittura in file .wav
@@ -136,15 +134,15 @@ x2=np.linspace(0 , num2/samplerate2, num2)
 plt.subplots(figsize=(11,7))
 plt.plot(x1, y1, color='blueviolet')
 plt.title('Waveform 1: Pulita pezzo', size=20)
-plt.xlabel('Tempo [s]', size=13)
-plt.ylabel('Ampiezza [UA]', size=13)
+plt.xlabel('Tempo (s)', size=13)
+plt.ylabel('Ampiezza (UA)', size=13)
 plt.show()
 
 plt.subplots(figsize=(11,7))
 plt.plot(x2, y2, color='blueviolet')
 plt.title('Waveform 2: Distorta pezzo', size=20)
-plt.xlabel('Tempo [s]', size=13)
-plt.ylabel('Ampiezza [UA]', size=13)
+plt.xlabel('Tempo (s)', size=13)
+plt.ylabel('Ampiezza (UA)', size=13)
 plt.show()
 
 #Riscrittura in file .wav
@@ -189,15 +187,15 @@ x2=np.linspace(0 , num2/srate, num2)
 plt.subplots(figsize=(11,7))
 plt.plot(x1, y1, color='crimson')
 plt.title('Waveform 1: Primo', size=20)
-plt.xlabel('Tempo [s]', size=13)
-plt.ylabel('Ampiezza [UA]', size=13)
+plt.xlabel('Tempo (s)', size=13)
+plt.ylabel('Ampiezza (UA)', size=13)
 plt.show()
 
 plt.subplots(figsize=(11,7))
 plt.plot(x2, y2, color='crimson')
 plt.title('Waveform 2: Secondo', size=20)
-plt.xlabel('Tempo [s]', size=13)
-plt.ylabel('Ampiezza [UA]', size=13)
+plt.xlabel('Tempo (s)', size=13)
+plt.ylabel('Ampiezza (UA)', size=13)
 plt.show()
 
 #Riscrittura in file .wav
