@@ -75,7 +75,6 @@ print('Frequenze (positive) estratte: ', freq1_hm[:len(freq1_hm)//2])
 print('Lunghezza array frequenze (positive) estratte: ', len(freq1_hm[:len(freq1_hm)//2]))
 
 antiy1_handmade=fft_handmade(c1_hm, k_giusti, len(c1)) #antitrasformo con la funzione a mano
-print(antiy1_handmade)
 print('Ascolto segnale audio antitrasformato a mano')
 default_speaker.play(antiy1_handmade/np.max(antiy1_handmade), samplerate1) #ascolto antitraformato a mano
 
