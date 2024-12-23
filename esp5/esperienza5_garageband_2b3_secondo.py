@@ -124,7 +124,6 @@ antiy2_basso_volume=fft.irfft(c2_basso_volume, n=len(t2))
 antiy2_chitarra_volume=fft.irfft(c2_chitarra_volume, n=len(t2))
 antiy2_volume=fft.irfft(c2_volume, n=len(t2))
 sf.write('./secondo_rw_volume.wav', antiy2_volume, samplerate2)
-default_speaker.play(data2/np.max(data2), samplerate2) #ascolto originale
 print('Riproduzione del segnale a volume modificato')
 default_speaker.play(antiy2_volume/np.max(antiy2_volume), samplerate2)
 
